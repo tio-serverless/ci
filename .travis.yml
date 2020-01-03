@@ -1,0 +1,22 @@
+language: go
+
+go:
+  - 1.13.1
+
+env:
+  global:
+    - TIO_VERSION=v0.1.0
+    - TIO_CI_NAME=tioserverless/trci
+
+services:
+  - docker
+
+before_install:
+  - echo "$DOCKER_PASSWD" | docker login -u "$DOCKER_USER" --password-stdin
+
+install:
+  - go build -mod=vendor -ldflags "-X main._VERSION_=$TIO_VERSION -X main._BRANCH_=$TRAVIS_BRANCH" -o bin/travis-ci *.go
+
+after_script:
+  - docker build -t ${TIO_CI_NAME}:${TIO_VERSION}-${TRAVIS_BRANCH} -f Dockerfile/Dockerfile .
+  - docker push ${TIO_CI_NAME}:${TIO_VERSION}-${TRAVIS_BRANCH}
