@@ -1,12 +1,19 @@
 language: go
-
 go:
-  - 1.13.1
-
+- 1.13.1
 env:
   global:
-    - TIO_VERSION=v0.1.0
-    - TIO_CI_NAME=tioserverless/trci
+  - TIO_VERSION=v0.1.0
+  - TIO_CI_NAME=tioserverless/trci
+
+addons:
+  sonarcloud:
+    organization: tio-serverless
+    token:
+      secure: JxhcC5g6iRlXk4sy60spgANYH/XZ9WJ23OdZ3p7NSwLmeyvnkJ7vPjifO1o15gz+AziiSJ1GaIyoCp/EpcB3iVTrSBa1Nnku6CwyMBwKCMYDV3pwWNI717POjU75DfLSH9dsKQR/u62tfR6evPhXvCTkoBpCuAJYbOsB6QjD28Icq8wABH+sG7mZg89z7UH+Gq8vyz3Hd26K6o1F9Hwa5fULCuUj43vMteLykDelsZYJaIO9zSolUZmvc7QqZjjdy8xcHFNlR+cPIwURp4H57zz9bPtKnOSQb73yFna98GwyUZb6PE99fIUgW68QGcbGN2WUdSJ8jHJClTZZMkGUdFp5zxTuUFu1ufC4n1rBPp/sZyG3XOcw5VpOXClqERKT1krbpNoymO9YJMkg4QO5QBrAUVhUQqSp751ScOwKYLLB+EsnCQAzABNcp5O9RcJgsKnNPuWPuv7iyYKUZFj+qWDQm3DTNvc50ihkG8L2toWVvr/sfjHEplr8TYa75afQGeDeDWql4tO9eg5hPCSSk5njMmoJYdlwKk8Ao5fOFGMWCziL7zcaFU9amkrAyoc1Rd0tiruwCtfoPqd1jnRaT7lkSGRbmHDlK0k//1fnTf3YFA7AKXt2dutS6wXwl/ECb2X37dULRkbVuGSEE9yv38oQYoOJTJ1GLxd6oakzFLQ=
+
+script:
+  - sonar-scanner
 
 services:
   - docker
