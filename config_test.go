@@ -10,9 +10,12 @@ func TestNewConfig(t *testing.T) {
 
 	var c = `log="debug"
 token="xyz123"
-[repos]
+[[repos]]
   branch=["master","develop"]
-  name=["c1","c2"]`
+  name=["c1","c2"]
+[[repos]]
+  branch=["release"]
+  name=["a1"]`
 
 	f, _ := ioutil.TempFile("", "")
 
@@ -33,12 +36,18 @@ token="xyz123"
 			want: config{
 				Log:   "debug",
 				Token: "xyz123",
-				Repos: struct {
+				Repos: []struct {
 					Branch []string `toml:"branch"`
 					Name   []string `toml:"name"`
 				}{
-					Branch: []string{"master", "develop"},
-					Name:   []string{"c1", "c2"},
+					{
+						Branch: []string{"master", "develop"},
+						Name:   []string{"c1", "c2"},
+					},
+					{
+						Branch: []string{"release"},
+						Name:   []string{"a1"},
+					},
 				},
 			},
 			wantErr: false,

@@ -6,11 +6,12 @@ Trigger Travis CI Daily
 定时触发Travis的构建任务,可以在空闲时刻做CI / CT
 
 ### 配置
-> myTravis-ci.toml
+> 默认配置文件是 `trci.toml`
 
+通过`TIO_TRCI_CONF`指定配置文件地址.
 
 ```toml
-[repos]
+[[repos]]
   branch=[""]
   name=["xx"]
 ```
