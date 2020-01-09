@@ -2,6 +2,7 @@ package main
 
 import (
 	"os"
+	"time"
 
 	log "github.com/sirupsen/logrus"
 )
@@ -18,6 +19,7 @@ func main() {
 	}
 
 	for _, r := range c.Repos {
+		time.Sleep(1 * time.Minute)
 		for _, b := range r.Branch {
 			for _, n := range r.Name {
 				log.Debugf("Trigger %s:%s", n, b)
